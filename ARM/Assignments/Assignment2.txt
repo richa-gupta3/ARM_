@@ -1,0 +1,32 @@
+ASSIGNMENT 2
+IF-THEN-ELSE in ARM Assembly:
+IT instruction allows four instructions to be executed conditionally.
+Syntax:  IT{x{y{z}}} cond
+•	Cond specifies the condition for the first instruction in the IT block.
+•	x specifies the condition for the second instruction in IT block. 
+•	y specifies the condition for the third instruction in IT block. 
+•	z specifies the condition for the fourth instruction in IT block. 
+The structure of IT instruction is “IF-THEN-(Else)” and the syntax is construct of two letters T and E. For example:
+•	IT refers to if-then (next instruction is conditional)
+•	ITT refers to if-then-then (next two instructions are conditional)
+•	ITTE refers to if-then-then-else (next three instructions are conditional)
+Each instruction inside the IT block must specify a condition suffix that is either same or logical inverse. That means if instruction is ITE, the first and second instruction have same condition suffix and third (Else) must have logical inverse of first two.
+
+For example:
+
+ITTEE EQ                          ; next four instructions are conditional
+MOVEQ R0,R1                ; condition(EQ) for first instruction- MOV
+ADDEQ R0,R0,R1            ; condition(EQ) for second instruction- ADD
+ADDNE R2,R2,#10          ; logical inverse condition(NE or !EQ) for third instruction- ADD
+MOVNE R3,R2                ; logical inverse condition(NE or !EQ) for third instruction- MOV
+
+Now, for the given question we have used code line with the conditional IT block but the conditions are not specified for the four instructions which is the reason for error flashed. If we specify the right conditions according to T and E specifier used in syntax, the error is removed as specified in code 2 of question given.
+
+ITTTE LT                         ; or N != V
+MOVLT R3, #0x100     ;LT is the condition same as “condition” specified in the IT syntax (T)
+MOVLT R8, #0x200     ;LT is the condition same as “condition” specified in the IT syntax (T)
+MOVLT R7, #0x200    ;LT is the condition same as “condition” specified in the IT syntax (T)
+MOVGE R6, #0x200   ;GE is the logical inverse of “condition” specified in the IT syntax (E)
+
+These lines of code 1 are modified to remove the errors and code is successfully assembled.
+
